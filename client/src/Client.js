@@ -1,10 +1,14 @@
 /* eslint-disable no-undef */
 function search(query, cb) {
-  return fetch(`api/products?q=${query}`, {
-    accept: 'application/json',
+  return fetch(`api/products`, {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
   }).then(checkStatus)
-    .then(parseJSON)
-    .then(cb);
+  .then(parseJSON)
+  .then(cb);
 }
 
 function checkStatus(response) {

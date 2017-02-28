@@ -1,18 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SelectedProducts from './SelectedProducts';
+import ProductSearch from './ProductSearch';
 
 class App extends Component {
+  state = {
+    selectedProducts: [],
+  }
+
+  removeProductItem = (itemIndex) => {
+    const filteredProducts = this.state.selectedProducts.filter(
+      (item, idx) => itemIndex !== idx,
+    );
+    this.setState({ selectedProducts: filteredProducts });
+  }
+
+  addProduct = (product) => {
+    const newProducts = this.state.selectedProducts.concat(product);
+    this.setState({ selectedProducts: newProducts });
+  }
+
   render() {
+    const { selectedProducts } = this.state;
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <div className='App'>
+        <div className='ui text container'>
+          <SelectedProducts
+            products={selectedProducts}
+            onProductClick={this.removeProductItem}
+          />
+        <ProductSearch
+            onProductClick={this.addProduct}
+          />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
