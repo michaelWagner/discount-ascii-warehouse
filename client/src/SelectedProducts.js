@@ -3,11 +3,11 @@ import Client from './Client';
 
 export default function SelectedProducts(props) {
   const { products } = props;
-  Client.search('', (products) => {
-    this.setState({
-      products: products,
-    });
-  });
+  // Client.search('', (products) => {
+  //   this.setState({
+  //     products: products,
+  //   });
+  // });
   const productRows = products.map((product, idx) => (
     <tr
       key={idx}

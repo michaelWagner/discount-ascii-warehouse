@@ -1,18 +1,20 @@
+
 /* eslint-disable no-undef */
 function search(query, cb) {
-  return fetch(`api/products`, {
-    method: "GET",
+  return fetch(`api/products?limit=1`, {
     headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Content-Type': 'application/x-json-stream',
+      'Accept': 'application/x-json-stream'
     }
-  }).then(checkStatus)
+  })
+  .then(checkStatus)
   .then(parseJSON)
   .then(cb);
 }
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
+    console.log(response)
     return response;
   }
   const error = new Error(`HTTP Error ${response.statusText}`);

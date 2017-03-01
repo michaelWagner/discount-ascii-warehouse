@@ -11,6 +11,23 @@ class ProductSearch extends React.Component {
     searchValue: '',
   };
 
+  componentDidMount() {
+    console.log('here')
+    fetch(`api/products`, {
+      headers: {
+        'Content-Type': 'application/x-json-stream',
+        'Accept': 'application/x-json-stream'
+      }
+    }).then(response => response.text())
+    .then(response => response.split('\n'))
+    .then(response => {
+      console.log(response);
+      this.setState({
+        products: response
+      });
+    });
+  };
+
   handleSearchChange = (e) => {
     const value = e.target.value;
 
@@ -28,12 +45,12 @@ class ProductSearch extends React.Component {
         showRemoveIcon: true,
       });
 
-      Client.search(value, (products) => {
-        console.log(products);
-        this.setState({
-          products: products,
-        });
-      });
+        // Client.search(value, (products) => {
+        //   console.log(products);
+        //   this.setState({
+        //     products: products,
+        //   });
+        // });
     }
   };
 
@@ -84,9 +101,7 @@ class ProductSearch extends React.Component {
               <th className='eight wide'>Description</th>
             </tr>
           </thead>
-          <tbody>
-            {productRows}
-          </tbody>
+          <tbody>{productRows}</tbody>
         </table>
       </div>
     );
