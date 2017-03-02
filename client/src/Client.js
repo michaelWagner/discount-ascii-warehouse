@@ -1,14 +1,14 @@
-
 /* eslint-disable no-undef */
-function search(query, cb) {
-  return fetch(`api/products?limit=1`, {
+function loadProducts(query, cb) {
+  fetch(`api/products?${query}`, {
     headers: {
       'Content-Type': 'application/x-json-stream',
       'Accept': 'application/x-json-stream'
     }
   })
   .then(checkStatus)
-  .then(parseJSON)
+  .then(response => response.text())
+  .then(response => response.split('\n'))
   .then(cb);
 }
 
@@ -25,8 +25,8 @@ function checkStatus(response) {
 }
 
 function parseJSON(response) {
-  return response.json();
+  return response;
 }
 
-const Client = { search };
+const Client = { loadProducts };
 export default Client;

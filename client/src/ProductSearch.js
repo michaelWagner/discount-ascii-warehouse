@@ -13,7 +13,7 @@ class ProductSearch extends React.Component {
 
   componentDidMount() {
     console.log('here')
-    fetch(`api/products`, {
+    fetch(`api/products?`, {
       headers: {
         'Content-Type': 'application/x-json-stream',
         'Accept': 'application/x-json-stream'

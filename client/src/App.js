@@ -1,37 +1,37 @@
 import React, { Component } from 'react';
-import SelectedProducts from './SelectedProducts';
-import ProductSearch from './ProductSearch';
+import ProductGrid from './ProductGrid';
+import Product from './Product';
 
 class App extends Component {
   state = {
-    selectedProducts: [],
+    products: [],
+    cart: []
   }
 
   removeProductItem = (itemIndex) => {
-    const filteredProducts = this.state.selectedProducts.filter(
+    const filteredProducts = this.state.products.filter(
       (item, idx) => itemIndex !== idx,
     );
-    this.setState({ selectedProducts: filteredProducts });
+    this.setState({ products: filteredProducts });
   }
 
-  addProduct = (product) => {
-    const newProducts = this.state.selectedProducts.concat(product);
-    this.setState({ selectedProducts: newProducts });
+  addProductToCart = (product) => {
+    const newCart = this.state.cart.concat(product);
+    this.setState({ cart: newCart });
+  }
+
+  viewProduct = (product) => {
+    // const newProducts = this.state.products.concat(product);
+    // this.setState({ products: newProducts });
   }
 
   render() {
-    const { selectedProducts } = this.state;
+    const { products, cart } = this.state;
 
     return (
       <div className='App'>
         <div className='ui text container'>
-          <SelectedProducts
-            products={selectedProducts}
-            onProductClick={this.removeProductItem}
-          />
-        <ProductSearch
-            onProductClick={this.addProduct}
-          />
+        <ProductGrid />
         </div>
       </div>
     );
