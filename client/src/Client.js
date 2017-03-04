@@ -14,7 +14,6 @@ function loadProducts(query, cb) {
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
-    console.log(response)
     return response;
   }
   const error = new Error(`HTTP Error ${response.statusText}`);
