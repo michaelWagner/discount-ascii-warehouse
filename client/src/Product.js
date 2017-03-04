@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductGrid from './ProductGrid';
+import ProductAttribute from './ProductAttribute';
 
 class Product extends React.Component {
   constructor(props) {
@@ -8,16 +9,10 @@ class Product extends React.Component {
 
   render() {
     return (<tr>
-      {this.props.products.map((product, idx) => (
-        this.renderProduct(product)
+      {this.props.product.map((productAttribute, idx) => (
+        <ProductAttribute productAttribute={productAttribute} />
       ))}
     </tr>);
-  }
-
-  renderProduct(product) {
-    return (
-      <td> {product} </td>
-    )
   }
 }
 export default Product;

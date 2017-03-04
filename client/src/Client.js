@@ -7,7 +7,7 @@ function loadProducts(query, cb) {
     }
   })
   .then(checkStatus)
-  .then(response => response.text())
+  .then(parseJSON)
   .then(response => response.split('\n'))
   .then(cb);
 }
@@ -25,7 +25,11 @@ function checkStatus(response) {
 }
 
 function parseJSON(response) {
-  return response;
+  return response.text();
+}
+
+function clean(obj) {
+
 }
 
 const Client = { loadProducts };
