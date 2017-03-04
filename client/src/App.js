@@ -30,10 +30,18 @@ class App extends Component {
     const { products, cart } = this.state;
 
     return (
+
       <div className='App'>
-        <div className='ui text container'>
+        <header>
+          <h1>Discount Ascii Warehouse</h1>
+
+          <p>Here you're sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.</p>
+
+          <p>But first, a word from our sponsors:</p>
+            <img className="ad" src={"/ad/?r=' + Math.floor(Math.random()*1000) + '"}/>
+        </header>
+
         <ProductGrid />
-        </div>
       </div>
     );
   }
