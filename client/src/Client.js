@@ -28,9 +28,5 @@ function parseJSON(response) {
   return response.text();
 }
 
-function clean(obj) {
-
-}
-
 const Client = { loadProducts };
 export default Client;

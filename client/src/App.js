@@ -17,6 +17,7 @@ class App extends Component {
 
   addProductToCart = (product) => {
     const newCart = this.state.cart.concat(product);
+    console.log('here: ' + product);
     this.setState({ cart: newCart });
   }
 

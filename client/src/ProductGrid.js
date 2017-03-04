@@ -13,16 +13,20 @@ class ProductGrid extends React.Component {
     Client.loadProducts(query, (products) => {
       for (var i = 0; i < products.length; i++) {
         if (products[i] === null || products[i] === undefined || products[i] === '') {
+          // Remove trailing newlines or empty nodes.
           delete products[i];
+        } else {
+          products[i] = JSON.parse(products[i]);
         }
       }
-      console.log(products)
       this.setState({products: products});
     });
   }
 
   addProductToCart = (product) => {
     const newProduct = product;
+    console.log('here: ' + product);
+
   }
 
   render() {
@@ -30,14 +34,13 @@ class ProductGrid extends React.Component {
 
     const productRows = products.map((product, idx) => (
       <tr key={idx} onClick={this.addProductToCart}>
-        <td>{JSON.parse(product).id.toString()}</td>
-        <td>{JSON.parse(product).size.toString()}</td>
-        <td>{JSON.parse(product).price.toString()}</td>
-        <td>{JSON.parse(product).face.toString()}</td>
-        <td>{JSON.parse(product).date.toString()}</td>
+        <td>{product.id.toString()}</td>
+        <td>{product.size.toString()}</td>
+        <td>{product.price.toString()}</td>
+        <td>{product.face.toString()}</td>
+        <td>{product.date.toString()}</td>
       </tr>
     ));
-    console.log(productRows)
 
     return (
       <div id='product-grid'>
