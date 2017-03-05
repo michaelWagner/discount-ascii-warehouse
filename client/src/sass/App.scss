@@ -1,0 +1,42 @@
+$discount-ascii-warehouse-color: #4CAF50;
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: left;
+  header {
+    h1 {
+      background-color: $discount-ascii-warehouse-color;
+      width: 100%;
+      padding: 14px 0;
+      margin: 0;
+      text-align: center;
+      color: #fff;
+    }
+  }
+}
+
+.ad {
+}
+
+
+#product-grid {
+  width: 95%;
+  margin: auto;
+
+  table {
+    border-collapse: collapse;
+
+    th, td {
+      border: 1px solid black;
+    }
+    th {
+      background-color: $discount-ascii-warehouse-color;
+      color: white;
+    }
+    tr:nth-child(even) {background-color: #f2f2f2}
+  }
+}
