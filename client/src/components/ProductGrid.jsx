@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Client from './Client';
 import Product from './Product';
@@ -7,11 +6,27 @@ import Advertisement from './Advertisement';
 class ProductGrid extends React.Component {
   constructor() {
     super();
-    this.state = { products: [] };
+    this.state = { products: [], cart: [] };
   }
 
   componentDidMount() {
     this.loadProducts('limit=50');
+  }
+
+  addProductToCart(product, cart) {
+    console.log(this.state.cart)
+    const newCart = this.state.cart.concat(product);
+    this.setState({cart: newCart})
+  }
+
+  removeProductFromCart(itemId) {
+    const newCart = this.state.cart.filter(
+      (item, idx) => item.id !== this.state.cart[idx].id,
+    );
+    this.setState({ cart: newCart });
+  }
+
+  viewProduct(product) {
   }
 
   loadProducts(query) {
@@ -29,12 +44,12 @@ class ProductGrid extends React.Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, cart } = this.state;
 
     const productRows = products.map((product, idx) => (
       ((idx % 20 === 0 && idx !== 0)
         ? <Advertisement key={idx}/>
-        : <Product key={idx} product={product} onClick={this.addProductToCart} />
+      : <Product key={idx} product={product} cart={cart} addProductToCart={this.addProductToCart.bind(this)} />
       )
     ));
 

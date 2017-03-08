@@ -7,9 +7,7 @@ class Advertisement extends React.Component {
 
   render() {
     return (
-      <tr key={this.props.idx}>
-        <img className="ad" src={"/ad/?r=" + Math.floor(Math.random()*1000)}/>
-      </tr>
+      <img className="ad" src={"/ad/?r=" + Math.floor(Math.random()*1000)}/>
     );
   }
 }

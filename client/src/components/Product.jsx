@@ -37,6 +37,11 @@ class Product extends React.Component {
     return result;
   }
 
+  handleClick(event) {
+    event.preventDefault();
+    this.props.addProductToCart(this.props.product);
+  }
+
   formatPrice(price) {
     if (price) {
       // Convert price to Dollar and cents notation in the format of '$1.50'.
@@ -52,7 +57,7 @@ class Product extends React.Component {
 
   render() {
     return (
-      <tr key={this.props.idx} onClick={this.props.addProductToCart}>
+      <tr key={this.props.idx} onClick={this.handleClick.bind(this)}>
         <td>{this.props.product.id}</td>
         <td>{this.formatPrice(this.props.product.price)}</td>
         <td>{this.props.product.size}</td>

@@ -4,32 +4,8 @@ import Product from './Product';
 import Advertisement from './Advertisement';
 
 class App extends Component {
-  state = {
-    products: [],
-    cart: []
-  }
-
-  removeProductItem = (itemIndex) => {
-    const filteredProducts = this.state.products.filter(
-      (item, idx) => itemIndex !== idx,
-    );
-    this.setState({ products: filteredProducts });
-  }
-
-  addProductToCart = (product) => {
-    const newCart = this.state.cart.concat(product);
-    console.log(product + ' added to cart!');
-    this.setState({ cart: newCart });
-  }
-
-  viewProduct = (product) => {
-    // const newProducts = this.state.products.concat(product);
-    // this.setState({ products: newProducts });
-  }
 
   render() {
-    const { products, cart } = this.state;
-
     return (
 
       <div className='App'>
