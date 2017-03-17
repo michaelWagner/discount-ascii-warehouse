@@ -26,10 +26,14 @@ class App extends Component {
         <header>
           <h1>Discount Ascii Warehouse</h1>
 
-          <p>Here you're sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.</p>
+          <p className="tag-line">
+            Here you're sure to find a bargain on some of the finest ascii
+            available to purchase. Be sure to peruse our selection of ascii
+            faces in an exciting range of sizes and prices.
+          </p>
 
         </header>
-        <p>But first, a word from our sponsors:</p>
+        <p className="ad-tag-line">But first, a word from our sponsors:</p>
         <Advertisement key={0} />
 
         <Loading hasLoaded={loadState} />

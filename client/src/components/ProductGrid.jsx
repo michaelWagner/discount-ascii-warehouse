@@ -16,7 +16,7 @@ class ProductGrid extends React.Component {
   }
 
   componentDidMount() {
-    this.loadProducts('sort=price');
+    this.loadProducts('limit=100');
   }
 
   addProductToCart(product, cart) {

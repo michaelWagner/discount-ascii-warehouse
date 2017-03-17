@@ -17,6 +17,14 @@ body {
       text-align: center;
       color: #fff;
     }
+
+    .tag-line {
+      margin: 2%;
+    }
+  }
+
+  .ad-tag-line {
+    margin: 2%;
   }
 
   .loader-indicator.fade-enter,
@@ -87,6 +95,8 @@ body {
 }
 
 .ad {
+  display: block;
+  margin: 2% auto;
 }
 
 .loading-bar {
