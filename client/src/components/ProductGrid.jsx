@@ -11,7 +11,9 @@ class ProductGrid extends React.Component {
       products: [],
       cart: [],
       adList: [],
-      isProductGridVisible: false
+      isProductGridVisible: false,
+      sortBy: null,
+      descending: false
     };
   }
 
@@ -50,13 +52,57 @@ class ProductGrid extends React.Component {
     });
   }
 
+  _sort(event) {
+    var column = event.target.innerHTML.toLowerCase();
+    var products = this.state.products.slice();
+    var descending = this.state.sortBy === column && !this.state.descending;
+
+    products.sort((a, b) => {
+
+      switch(column) {
+        case 'id':
+          // Sorts by index which prefixes the id string.
+          // Separate index from id, then convert index to int before sorting.
+          let idA = parseInt(a[column].split('-')[0], 10);
+          let idB = parseInt(b[column].split('-')[0], 10);
+          return descending
+          ? idB - idA
+          : idA - idB;
+        case 'price':
+          return descending
+            ? b[column] - a[column]
+            : a[column] - b[column];
+        case 'face':
+          return descending
+            ? b['size'] - a['size']
+            : a['size'] - b['size'];
+        case 'size':
+          return descending
+            ? b[column] - a[column]
+            : a[column] - b[column];
+        case 'date':
+          return descending
+            ? new Date(b[column]) - new Date(a[column])
+            : new Date(a[column]) - new Date(b[column]);
+        default:
+          throw new Error('Column is not valid');
+      }
+    });
+
+    this.setState({
+      products: products,
+      sortBy: column,
+      descending: descending
+    });
+  }
+
   render() {
     const { products, cart, adList, isProductGridVisible } = this.state;
 
     const productRows = products.map((product, idx) => (
       ((idx % 20 === 0 && idx !== 0)
         ? <Advertisement key={idx} />
-        : <Product key={idx}
+        : <Product key={product.id}
                    product={product}
                    cart={cart}
                    addProductToCart={this.addProductToCart.bind(this)} />
@@ -71,11 +117,11 @@ class ProductGrid extends React.Component {
           <table className='ui selectable structured large table'>
             <thead>
               <tr className="product-attribute-header">
-                <th>ID</th>
-                <th>Price</th>
-                <th>Size</th>
-                <th>Face</th>
-                <th>Date</th>
+                <th onClick={this._sort.bind(this)}>ID</th>
+                <th onClick={this._sort.bind(this)}>Price</th>
+                <th onClick={this._sort.bind(this)}>Size</th>
+                <th onClick={this._sort.bind(this)}>Face</th>
+                <th onClick={this._sort.bind(this)}>Date</th>
               </tr>
             </thead>
             <tbody>{productRows}</tbody>

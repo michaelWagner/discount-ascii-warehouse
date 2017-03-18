@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProductGrid from './ProductGrid';
 import Loading from './Loading';
-import Product from './Product';
+// import Product from './Product';
 import Advertisement from './Advertisement';
 
 class App extends Component {

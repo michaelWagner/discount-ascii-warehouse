@@ -57,7 +57,7 @@ class Product extends React.Component {
 
   render() {
     return (
-      <tr key={this.props.idx} onClick={this.handleClick.bind(this)}>
+      <tr key={this.props.product.id} onClick={this.handleClick.bind(this)}>
         <td>{this.props.product.id}</td>
         <td>{this.formatPrice(this.props.product.price)}</td>
         <td>{this.props.product.size}</td>
