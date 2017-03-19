@@ -12,6 +12,7 @@ class ProductGrid extends React.Component {
       cart: [],
       adList: [],
       isProductGridVisible: false,
+      componentName: 'ProductGrid',
       sortBy: null,
       descending: false
     };
@@ -97,11 +98,11 @@ class ProductGrid extends React.Component {
   }
 
   render() {
-    const { products, cart, adList, isProductGridVisible } = this.state;
+    const { products, cart, adList, isProductGridVisible, componentName } = this.state;
 
     const productRows = products.map((product, idx) => (
       ((idx % 20 === 0 && idx !== 0)
-        ? <Advertisement key={idx} />
+        ? <Advertisement key={idx} componentName={componentName} />
         : <Product key={product.id}
                    product={product}
                    cart={cart}

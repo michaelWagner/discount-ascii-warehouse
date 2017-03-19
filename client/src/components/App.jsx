@@ -7,7 +7,10 @@ import Advertisement from './Advertisement';
 class App extends Component {
   constructor() {
     super();
-    this.state = { hasProductGridLoaded: false };
+    this.state = {
+      hasProductGridLoaded: false,
+      componentName: 'App'
+    };
   }
   hasLoaded() {
     this.setState({hasProductGridLoaded: true});
@@ -34,7 +37,7 @@ class App extends Component {
 
         </header>
         <p className="ad-tag-line">But first, a word from our sponsors:</p>
-        <Advertisement key={0} />
+        <Advertisement key={0} componentName={this.state.componentName}/>
 
         <Loading hasLoaded={loadState} />
         <ProductGrid hasProductGridLoaded={this.hasLoaded.bind(this)}/>
