@@ -54,7 +54,9 @@ class ProductGrid extends React.Component {
   }
 
   _sort(event) {
-    var column = event.target.innerHTML.toLowerCase();
+    // Make column lowercase and then
+    // remove the sort arrows before checking column name.
+    var column = event.target.innerHTML.toLowerCase().split(" ")[0];
     var products = this.state.products.slice();
     var descending = this.state.sortBy === column && !this.state.descending;
 
@@ -98,7 +100,7 @@ class ProductGrid extends React.Component {
   }
 
   render() {
-    const { products, cart, adList, isProductGridVisible, componentName } = this.state;
+    const { products, cart, adList, isProductGridVisible, componentName, sortBy, descending } = this.state;
 
     const productRows = products.map((product, idx) => (
       ((idx % 20 === 0 && idx !== 0)
@@ -110,6 +112,15 @@ class ProductGrid extends React.Component {
       )
     ));
 
+    const headers = ["ID", "Price", "Size", "Face", "Date"];
+
+    const productHeaders = headers.map((title, idx) => (
+      ((sortBy === title.toLowerCase())
+        ? <th key={idx} onClick={this._sort.bind(this)}>{title += descending ? ' \u2191' : ' \u2193'}</th>
+        : <th key={idx} onClick={this._sort.bind(this)}>{title}</th>
+      )
+    ));
+
     let grid = null;
 
     if (isProductGridVisible) {
@@ -118,11 +129,7 @@ class ProductGrid extends React.Component {
           <table className='ui selectable structured large table'>
             <thead>
               <tr className="product-attribute-header">
-                <th onClick={this._sort.bind(this)}>ID</th>
-                <th onClick={this._sort.bind(this)}>Price</th>
-                <th onClick={this._sort.bind(this)}>Size</th>
-                <th onClick={this._sort.bind(this)}>Face</th>
-                <th onClick={this._sort.bind(this)}>Date</th>
+                {productHeaders}
               </tr>
             </thead>
             <tbody>{productRows}</tbody>
