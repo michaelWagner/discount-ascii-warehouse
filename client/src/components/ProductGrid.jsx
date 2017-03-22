@@ -1,4 +1,5 @@
 import React from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import App from './App';
 import Client from './Client';
 import Product from './Product';
@@ -10,16 +11,18 @@ class ProductGrid extends React.Component {
     this.state = {
       products: [],
       cart: [],
-      adList: [],
       isProductGridVisible: false,
+      allProductsLoaded: false,
+      nextProducts: [],
       componentName: 'ProductGrid',
       sortBy: null,
-      descending: false
+      descending: false,
+      numProductsVisible: 25
     };
   }
 
   componentDidMount() {
-    this.loadProducts('limit=100');
+    this.loadProducts(this.state.numProductsVisible);
   }
 
   addProductToCart(product, cart) {
@@ -27,6 +30,9 @@ class ProductGrid extends React.Component {
     this.setState({cart: newCart}, () => console.log(this.state.cart));
   }
 
+  hasMoreProducts() {
+    return (this.state.allProductsLoaded) ? false : true;
+  }
   removeProductFromCart(itemId) {
     const newCart = this.state.cart.filter(
       (item, idx) => item.id !== this.state.cart[idx].id,
@@ -37,7 +43,12 @@ class ProductGrid extends React.Component {
   viewProduct(product) {
   }
 
-  loadProducts(query) {
+  loadProducts(numProducts=25) {
+    const query = 'limit=' + (this.state.numProductsVisible + numProducts);
+    if (this.state.nextProducts.length > 0) {
+      this.state.products = this.state.nextProducts;
+    }
+
     Client.loadProducts(query, (products) => {
       for (var i = 0; i < products.length; i++) {
         if (products[i] === null || products[i] === undefined || products[i] === '') {
@@ -47,10 +58,33 @@ class ProductGrid extends React.Component {
           products[i] = JSON.parse(products[i]);
         }
       }
-      this.setState({products: products});
-      this.setState({isProductGridVisible: true});
-      this.props.hasProductGridLoaded();
+      const numProductsVisible = this.state.numProductsVisible + numProducts;
+
+      console.log(numProductsVisible);
+
+      if (this.state.numProductsVisible === products.length) {
+        console.log('you made it to the end')
+        this.setState({allProductsLoaded: true});
+        return false;
+      } else {
+        this.setState({
+          nextProducts: products,
+          isProductGridVisible: true,
+          numProductsVisible: numProductsVisible
+        });
+        this.props.hasProductGridLoaded();
+      }
     });
+  }
+
+  shouldComponentUpdate( newProps, newState ) {
+    // console.log('newProps: ' +  JSON.stringify(newProps))
+    // console.log('newState: ' +  JSON.stringify(newState))
+    if (this.state.allProductsLoaded) {
+      return false
+    } else {
+      return true;
+    }
   }
 
   _sort(event) {
@@ -100,11 +134,21 @@ class ProductGrid extends React.Component {
   }
 
   render() {
-    const { products, cart, adList, isProductGridVisible, componentName, sortBy, descending } = this.state;
+    const {
+      products,
+      cart,
+      isProductGridVisible,
+      componentName,
+      sortBy,
+      descending
+     } = this.state;
 
     const productRows = products.map((product, idx) => (
       ((idx % 20 === 0 && idx !== 0)
-        ? <Advertisement key={idx} componentName={componentName} />
+        ? <Advertisement key={idx} adList={this.props.adList}
+                         generateRandomAd={this.props.generateRandomAd}
+                         randomAd={this.props.randomAd}
+                         componentName={componentName} />
         : <Product key={product.id}
                    product={product}
                    cart={cart}
@@ -126,14 +170,21 @@ class ProductGrid extends React.Component {
     if (isProductGridVisible) {
       grid = (
         <div id='product-grid'>
-          <table className='ui selectable structured large table'>
-            <thead>
-              <tr className="product-attribute-header">
-                {productHeaders}
-              </tr>
-            </thead>
-            <tbody>{productRows}</tbody>
-          </table>
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={this.loadProducts.bind(this)}
+            hasMore={!this.state.allProductsLoaded}>
+            <table className='ui selectable structured large table'>
+              <thead>
+                <tr className="product-attribute-header">
+                  {productHeaders}
+                </tr>
+              </thead>
+                <tbody>
+                    {productRows}
+                </tbody>
+            </table>
+          </InfiniteScroll>
         </div>
       );
     } else {

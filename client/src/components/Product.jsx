@@ -2,9 +2,6 @@ import React from 'react';
 // import ProductGrid from './ProductGrid';
 
 class Product extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
 
   formatDateInRelativeTime(date) {
     let result = '';
