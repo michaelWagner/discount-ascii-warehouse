@@ -143,18 +143,31 @@ class ProductGrid extends React.Component {
       descending
      } = this.state;
 
-    const productRows = products.map((product, idx) => (
-      ((idx % 20 === 0 && idx !== 0)
-        ? <Advertisement key={idx} adList={this.props.adList}
-                         generateRandomAd={this.props.generateRandomAd}
-                         randomAd={this.props.randomAd}
-                         componentName={componentName} />
-        : <Product key={product.id}
-                   product={product}
-                   cart={cart}
-                   addProductToCart={this.addProductToCart.bind(this)} />
-      )
-    ));
+    const productRows = products.map(function(product, idx) {
+      // Show an Advertisement every 20 Products.
+      if (idx % 20 === 0 && idx !== 0) {
+        // If there is an Advertisement, render both Advertisement and Product.
+        return (
+                <tbody>
+                  <Advertisement key={idx} adList={this.props.adList}
+                                 generateRandomAd={this.props.generateRandomAd}
+                                 randomAd={this.props.randomAd}
+                                 componentName={componentName} />
+                  <Product key={product.id}
+                                      product={product}
+                                      cart={cart}
+                                      addProductToCart={this.addProductToCart.bind(this)} />
+                </tbody>)
+      } else {
+        // If there is no Advertisement, just render Product.
+        return (<tbody>
+                  <Product key={product.id}
+                            product={product}
+                            cart={cart}
+                            addProductToCart={this.addProductToCart.bind(this)} />
+                </tbody>)
+      }
+    }.bind(this));
 
     const headers = ["ID", "Price", "Size", "Face", "Date"];
 
@@ -169,8 +182,8 @@ class ProductGrid extends React.Component {
 
     if (isProductGridVisible) {
       grid = (
-        <div id='product-grid'>
-          <InfiniteScroll
+        <div id='product-grid-wrapper'>
+          <InfiniteScroll className={'product-grid'}
             pageStart={0}
             loadMore={this.loadProducts.bind(this)}
             hasMore={!this.state.allProductsLoaded}>
@@ -180,9 +193,7 @@ class ProductGrid extends React.Component {
                   {productHeaders}
                 </tr>
               </thead>
-                <tbody>
-                    {productRows}
-                </tbody>
+              {productRows}
             </table>
           </InfiniteScroll>
         </div>
