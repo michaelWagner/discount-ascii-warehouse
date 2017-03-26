@@ -6,23 +6,59 @@ import Product from './Product';
 import Advertisement from './Advertisement';
 
 class ProductGrid extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       products: [],
+      nextProducts: [],
       cart: [],
       isProductGridVisible: false,
       allProductsLoaded: false,
-      nextProducts: [],
-      componentName: 'ProductGrid',
       sortBy: null,
       descending: false,
-      numProductsVisible: 25
+      page: 0,
+      numProductsVisible: 0,
+    };
+
+    this.defaultProps = {
+      numProductsPerPage: 25,
+      componentName: 'ProductGrid'
     };
   }
 
   componentDidMount() {
-    this.loadProducts(this.state.numProductsVisible);
+    // Initially load first batch of products.
+    const query = (
+      'limit=' + this.defaultProps.numProductsPerPage +
+      '&skip=' + this.state.page * this.defaultProps.numProductsPerPage
+    );
+
+    this.loadProducts(query, (products) => {
+      const numProductsVisible = products.length;
+      const initialProducts = products;
+      const nextPage = this.state.page + 1;
+
+      this.setState({
+        products: initialProducts,
+        numProductsVisible: numProductsVisible,
+        isProductGridVisible: true,
+        page: nextPage
+      },
+        () =>  {
+          // Pre-fetch next batch of products and cache them.
+          const nextQuery = (
+            'limit=' + this.defaultProps.numProductsPerPage +
+            '&skip=' + (this.state.page * this.defaultProps.numProductsPerPage)
+          );
+          this.loadProducts(nextQuery, (nextProducts) => {
+            this.setState({nextProducts: nextProducts});
+          });
+        }
+      );
+    });
+    // Show ProductGrid now that it has loaded.
+    this.props.hasProductGridLoaded();
   }
 
   addProductToCart(product, cart) {
@@ -43,48 +79,51 @@ class ProductGrid extends React.Component {
   viewProduct(product) {
   }
 
-  loadProducts(numProducts=25) {
-    const query = 'limit=' + (this.state.numProductsVisible + numProducts);
-    if (this.state.nextProducts.length > 0) {
-      this.state.products = this.state.nextProducts;
-    }
-
+  loadProducts(query, callback) {
+    // Creates an array of products in JSON format.
     Client.loadProducts(query, (products) => {
       for (var i = 0; i < products.length; i++) {
         if (products[i] === null || products[i] === undefined || products[i] === '') {
           // Remove trailing newlines or empty nodes.
-          delete products[i];
+          products.splice(i, 1);
         } else {
           products[i] = JSON.parse(products[i]);
         }
       }
-      const numProductsVisible = this.state.numProductsVisible + numProducts;
-
-      console.log(numProductsVisible);
-
-      if (this.state.numProductsVisible === products.length) {
-        console.log('you made it to the end')
-        this.setState({allProductsLoaded: true});
-        return false;
-      } else {
-        this.setState({
-          nextProducts: products,
-          isProductGridVisible: true,
-          numProductsVisible: numProductsVisible
-        });
-        this.props.hasProductGridLoaded();
-      }
+      callback(products);
     });
   }
 
-  shouldComponentUpdate( newProps, newState ) {
-    // console.log('newProps: ' +  JSON.stringify(newProps))
-    // console.log('newState: ' +  JSON.stringify(newState))
-    if (this.state.allProductsLoaded) {
-      return false
-    } else {
-      return true;
-    }
+  loadNextProducts() {
+    // Render the page with the previously cached nextProducts and update state.
+    const newProducts = this.state.products.concat(this.state.nextProducts);
+    const numProductsVisible = newProducts.length;
+    const nextPage = this.state.page + 1;
+    const query = (
+      'limit=' + this.defaultProps.numProductsPerPage +
+      '&skip=' + numProductsVisible
+    );
+
+    // Update products with cached next page.
+    this.setState({
+      products: newProducts,
+      numProductsVisible: numProductsVisible,
+      page: nextPage
+    },
+      this.loadProducts(query, (nextProducts) => {
+        if (nextProducts.length < this.defaultProps.numProductsPerPage) {
+          // TODO - Add footer component.
+          console.log('All Products Loaded')
+          this.setState({
+            allProductsLoaded: true,
+            nextProducts: nextProducts
+          });
+        } else {
+          // Pre-fetch next products and cache.
+          this.setState({nextProducts: nextProducts});
+        }
+      })
+    )
   }
 
   _sort(event) {
@@ -95,7 +134,6 @@ class ProductGrid extends React.Component {
     var descending = this.state.sortBy === column && !this.state.descending;
 
     products.sort((a, b) => {
-
       switch(column) {
         case 'id':
           // Sorts by index which prefixes the id string.
@@ -138,9 +176,9 @@ class ProductGrid extends React.Component {
       products,
       cart,
       isProductGridVisible,
-      componentName,
       sortBy,
-      descending
+      descending,
+      allProductsLoaded
      } = this.state;
 
     const productRows = products.map(function(product, idx) {
@@ -148,11 +186,11 @@ class ProductGrid extends React.Component {
       if (idx % 20 === 0 && idx !== 0) {
         // If there is an Advertisement, render both Advertisement and Product.
         return (
-                <tbody>
+                <tbody key={idx}>
                   <Advertisement key={idx} adList={this.props.adList}
                                  generateRandomAd={this.props.generateRandomAd}
                                  randomAd={this.props.randomAd}
-                                 componentName={componentName} />
+                                 componentName={this.defaultProps.componentName} />
                   <Product key={product.id}
                                       product={product}
                                       cart={cart}
@@ -160,7 +198,7 @@ class ProductGrid extends React.Component {
                 </tbody>)
       } else {
         // If there is no Advertisement, just render Product.
-        return (<tbody>
+        return (<tbody key={idx}>
                   <Product key={product.id}
                             product={product}
                             cart={cart}
@@ -185,8 +223,8 @@ class ProductGrid extends React.Component {
         <div id='product-grid-wrapper'>
           <InfiniteScroll className={'product-grid'}
             pageStart={0}
-            loadMore={this.loadProducts.bind(this)}
-            hasMore={!this.state.allProductsLoaded}>
+            loadMore={this.loadNextProducts.bind(this)}
+            hasMore={!allProductsLoaded}>
             <table className='ui selectable structured large table'>
               <thead>
                 <tr className="product-attribute-header">

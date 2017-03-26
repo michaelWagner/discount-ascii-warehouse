@@ -9,10 +9,11 @@ class App extends Component {
     super();
     this.state = {
       hasProductGridLoaded: false,
-      componentName: 'App',
       randomAd: null,
       adList: []
     };
+
+    this.defaultProps = {componentName: 'App'}
   }
 
   addAdtoAdList(ad) {
@@ -37,6 +38,8 @@ class App extends Component {
 
   hasLoaded() {
     this.setState({hasProductGridLoaded: true});
+    // console.log(this.state.hasProductGridLoaded)
+    return true;
   }
 
   render() {
@@ -59,7 +62,7 @@ class App extends Component {
 
         </header>
         <p className="ad-tag-line">But first, a word from our sponsors:</p>
-        <Advertisement key={0} adList={this.state.adList} randomAd={this.randomAd} generateRandomAd={this.generateRandomAd.bind(this)} componentName={this.state.componentName}/>
+        <Advertisement key={0} adList={this.state.adList} randomAd={this.randomAd} generateRandomAd={this.generateRandomAd.bind(this)} componentName={this.defaultProps.componentName}/>
 
         <Loading hasLoaded={loadState} />
         <ProductGrid adList={this.state.adList} randomAd={this.randomAd} generateRandomAd={this.generateRandomAd.bind(this)} hasProductGridLoaded={this.hasLoaded.bind(this)}/>

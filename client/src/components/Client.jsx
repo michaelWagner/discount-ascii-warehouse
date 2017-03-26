@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-function loadProducts(query, cb) {
+function loadProducts(query, callback) {
   fetch(`api/products?${query}`, {
     headers: {
       'Content-Type': 'application/x-json-stream',
@@ -9,7 +9,7 @@ function loadProducts(query, cb) {
   .then(checkStatus)
   .then(parseJSON)
   .then(response => response.split('\n'))
-  .then(cb);
+  .then(callback);
 }
 
 function checkStatus(response) {
