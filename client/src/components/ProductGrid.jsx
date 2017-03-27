@@ -231,6 +231,15 @@ class ProductGrid extends React.Component {
                   {productHeaders}
                 </tr>
               </thead>
+              <tfoot>
+                <tr>
+                  <td colSpan="5">
+                    <div>
+                      ~ end of catalogue ~
+                    </div>
+                  </td>
+                </tr>
+              </tfoot>
               {productRows}
             </table>
           </InfiniteScroll>
