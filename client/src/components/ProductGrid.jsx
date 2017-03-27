@@ -12,7 +12,6 @@ class ProductGrid extends React.Component {
     this.state = {
       products: [],
       nextProducts: [],
-      cart: [],
       isProductGridVisible: false,
       allProductsLoaded: false,
       sortBy: null,
@@ -61,22 +60,8 @@ class ProductGrid extends React.Component {
     this.props.hasProductGridLoaded();
   }
 
-  addProductToCart(product, cart) {
-    const newCart = this.state.cart.concat(product);
-    this.setState({cart: newCart}, () => console.log(this.state.cart));
-  }
-
   hasMoreProducts() {
     return (this.state.allProductsLoaded) ? false : true;
-  }
-  removeProductFromCart(itemId) {
-    const newCart = this.state.cart.filter(
-      (item, idx) => item.id !== this.state.cart[idx].id,
-    );
-    this.setState({ cart: newCart });
-  }
-
-  viewProduct(product) {
   }
 
   loadProducts(query, callback) {
@@ -113,7 +98,6 @@ class ProductGrid extends React.Component {
       this.loadProducts(query, (nextProducts) => {
         if (nextProducts.length < this.defaultProps.numProductsPerPage) {
           // TODO - Add footer component.
-          console.log('All Products Loaded')
           this.setState({
             allProductsLoaded: true,
             nextProducts: nextProducts
@@ -174,7 +158,6 @@ class ProductGrid extends React.Component {
   render() {
     const {
       products,
-      cart,
       isProductGridVisible,
       sortBy,
       descending,
@@ -187,22 +170,19 @@ class ProductGrid extends React.Component {
         // If there is an Advertisement, render both Advertisement and Product.
         return (
                 <tbody key={idx}>
-                  <Advertisement key={idx} adList={this.props.adList}
-                                 generateRandomAd={this.props.generateRandomAd}
-                                 randomAd={this.props.randomAd}
+                  <Advertisement key={idx}
+                                 generateRandomId={this.props.generateRandomId}
                                  componentName={this.defaultProps.componentName} />
                   <Product key={product.id}
                                       product={product}
-                                      cart={cart}
-                                      addProductToCart={this.addProductToCart.bind(this)} />
+                                      toggleCart={this.props.addProductToCart} />
                 </tbody>)
       } else {
         // If there is no Advertisement, just render Product.
         return (<tbody key={idx}>
                   <Product key={product.id}
                             product={product}
-                            cart={cart}
-                            addProductToCart={this.addProductToCart.bind(this)} />
+                            toggleCart={this.props.addProductToCart} />
                 </tbody>)
       }
     }.bind(this));
@@ -231,11 +211,11 @@ class ProductGrid extends React.Component {
                   {productHeaders}
                 </tr>
               </thead>
-              <tfoot>
+              <tfoot className={(allProductsLoaded ? 'product-grid-footer' : 'hidden-product-grid-footer')}>
                 <tr>
                   <td colSpan="5">
                     <div>
-                      ~ end of catalogue ~
+                      {"~ end of catalogue ~"}
                     </div>
                   </td>
                 </tr>

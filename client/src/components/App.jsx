@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import ProductGrid from './ProductGrid';
 import Loading from './Loading';
+import Cart from './Cart';
 import Advertisement from './Advertisement';
 
 class App extends Component {
@@ -9,36 +10,46 @@ class App extends Component {
     super();
     this.state = {
       hasProductGridLoaded: false,
-      randomAd: null,
+      cart: [],
       adList: []
     };
 
     this.defaultProps = {componentName: 'App'}
   }
 
-  addAdtoAdList(ad) {
-    let newAdList = this.state.adList.concat(ad);
-    this.setState({randomAd: ad, adList: newAdList });
+  addProductToCart(product) {
+    const newCart = this.state.cart.concat(product);
+    this.setState({cart: newCart}, () => {
+      console.log(product.id, "has been added to cart.")
+    });
   }
 
-  // loadMore() {
-  //   ProductGrid.loadProducts('limit=400');
-  // }
+  removeProductFromCart(product) {
+    const newCart = this.state.cart.filter(
+      (item, idx) => item.id !== product.id,
+    );
+    this.setState({ cart: newCart });
+  }
 
-  generateRandomAd() {
-    let random = Math.floor(Math.random() * 1000);
-    if (this.state.adList.length > 1) {
-      while (random === this.state.adList[-1]) {
-        random = Math.floor(Math.random() * 1000);
-      }
+  viewCart() {
+  }
+
+  generateRandomId() {
+    // Make sure randomId is unique.
+    let randomId = Math.floor(Math.random() * 1000);
+    while(this.state.adList.indexOf(randomId) > 0) {
+      randomId = Math.floor(Math.random() * 1000);
     }
-    this.addAdtoAdList(random)
-    return random;
+
+    let newAdList = this.state.adList.concat(randomId);
+    this.setState({adList: newAdList });
+
+    return randomId;
   }
 
   hasLoaded() {
     this.setState({hasProductGridLoaded: true});
-    // console.log(this.state.hasProductGridLoaded)
+
     return true;
   }
 
@@ -53,19 +64,21 @@ class App extends Component {
       <div className='App'>
         <header>
           <h1>Discount Ascii Warehouse</h1>
-
-          <p className="tag-line">
-            Here you're sure to find a bargain on some of the finest ascii
-            available to purchase. Be sure to peruse our selection of ascii
-            faces in an exciting range of sizes and prices.
-          </p>
-
+          <div className="cart-btn" onClick={this.toggleCart}></div>
+          { this.state.cartVisible ? <Cart products={this.state.cart} /> : ''}
         </header>
+
+        <p className="tag-line">
+          Here you're sure to find a bargain on some of the finest ascii
+          available to purchase. Be sure to peruse our selection of ascii
+          faces in an exciting range of sizes and prices.
+        </p>
         <p className="ad-tag-line">But first, a word from our sponsors:</p>
-        <Advertisement key={0} adList={this.state.adList} randomAd={this.randomAd} generateRandomAd={this.generateRandomAd.bind(this)} componentName={this.defaultProps.componentName}/>
+
+        <Advertisement key={0} generateRandomId={this.generateRandomId.bind(this)} componentName={this.defaultProps.componentName}/>
 
         <Loading hasLoaded={loadState} />
-        <ProductGrid adList={this.state.adList} randomAd={this.randomAd} generateRandomAd={this.generateRandomAd.bind(this)} hasProductGridLoaded={this.hasLoaded.bind(this)}/>
+        <ProductGrid addProductToCart={this.addProductToCart.bind(this)} generateRandomId={this.generateRandomId.bind(this)} hasProductGridLoaded={this.hasLoaded.bind(this)}/>
       </div>
     );
   }

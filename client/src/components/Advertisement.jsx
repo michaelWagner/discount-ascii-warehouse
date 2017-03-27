@@ -3,20 +3,30 @@ import React from 'react';
 class Advertisement extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      randomId: null
+    };
+  }
+
+  componentWillMount() {
+    let randomId = this.props.generateRandomId();
+    this.setState({randomId: randomId});
   }
 
   render() {
-    let random = Math.floor(Math.random() * 1000);
+    const random = this.state.randomId;
+
     const advertisement = (
       this.props.componentName === 'ProductGrid'
       ? (<tr>
           <td colSpan="5">
             <div>
-              <img className="ad" alt="in" src={"/ad/?r=" + random} />
+              <img key={random} className="ad" alt="" src={"/ad/?r=" + random} />
             </div>
           </td>
         </tr>)
-      : <img className="ad" alt="out" src={"/ad/?r=" + random} />
+      : <img key={random} className="ad" alt="" src={"/ad/?r=" + random} />
     );
 
     return advertisement;

@@ -1,5 +1,4 @@
 import React from 'react';
-// import ProductGrid from './ProductGrid';
 
 class Product extends React.Component {
 
@@ -36,7 +35,7 @@ class Product extends React.Component {
 
   handleClick(event) {
     event.preventDefault();
-    this.props.addProductToCart(this.props.product);
+    this.props.toggleCart(this.props.product);
   }
 
   formatPrice(price) {

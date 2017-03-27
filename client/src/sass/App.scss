@@ -18,12 +18,24 @@ body {
       color: #fff;
     }
 
-    .tag-line {
-      margin: 2%;
+    .cart-btn {
+      background-image: url('../img/shopping_cart_btn.png');
+      background-size: 87%;
+      background-repeat: no-repeat;
+      position: absolute;
+      height: 50px;
+      width: 57px;
+      top: 1.2%;
+      right: 0.7%;
+      &:hover {
+        cursor: pointer;
+        background-image: url('../img/shopping_cart_btn_hover.png');
+      }
     }
+
   }
 
-  .ad-tag-line {
+  .tag-line, .ad-tag-line {
     margin: 2%;
   }
 
@@ -139,6 +151,14 @@ body {
       }
       tbody:nth-child(even) {
           background-color: #f2f2f2;
+      }
+      .hidden-product-grid-footer {
+        display: none;
+      }
+      .product-grid-footer {
+        background-color: $discount-ascii-warehouse-color;
+        color: #fff;
+        font-size: 20px;
       }
     }
   }
