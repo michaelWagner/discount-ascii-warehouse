@@ -217,7 +217,7 @@ class ProductGrid extends React.Component {
               </thead>
               <tfoot className={(allProductsLoaded ? "product-grid-footer" : "hidden-product-grid-footer")}>
                 <tr>
-                  <td colSpan="5">
+                  <td colSpan="6">
                     <div>
                       {"~ end of catalogue ~"}
                     </div>

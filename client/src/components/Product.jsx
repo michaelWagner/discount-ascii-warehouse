@@ -51,7 +51,7 @@ class Product extends React.Component {
         <td>{this.props.product.size}</td>
         <td style={this.styleFace(this.props.product.size)}>{this.props.product.face}</td>
         <td>{this.formatDateInRelativeTime(this.props.product.date)}</td>
-        {this.props.parentComponent === "Cart" ? <td> x </td> : <td> + </td>}
+        <td className="add-to-cart-btn">{this.props.parentComponent === "Cart" ? "x" : "+" }</td>
       </tr>
     );
   }

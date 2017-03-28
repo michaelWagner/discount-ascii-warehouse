@@ -32,7 +32,7 @@ class App extends Component {
       // Convert price to Dollar and cents notation in the format of '$1.50'.
       return '$' + (parseInt(price, 10) / 100).toFixed(2);
     } else {
-      return 'Price Unavailable';
+      return '$0.00';
     }
   }
 
@@ -54,10 +54,11 @@ class App extends Component {
     return true;
   }
 
-  removeProductFromCart() {
+  removeProductFromCart(product) {
+    console.log(product)
     // TODO remove only one product.
     const newCart = this.state.cart.filter(
-      (item, idx) => item.id !== item.id,
+      (item, idx) => item.id !== product.id
     );
     this.setState({ cart: newCart });
   }
@@ -67,6 +68,7 @@ class App extends Component {
     this.setState({cartVisible: cartVisible});
   }
 
+
   render() {
     const loadState = (
       this.state.hasProductGridLoaded
@@ -74,22 +76,35 @@ class App extends Component {
       : "loading-bar"
     );
 
+    const totalPrice = this.state.cart.reduce((total, product) => {
+      return total + product.price
+    }, 0);
+
     return (
       <div className='App'>
         <header>
           <h1>Discount Ascii Warehouse</h1>
           <div className="cart-btn" onClick={this.toggleCartVisiblity.bind(this)}></div>
+          <div className="cart-total-price">{this.formatPrice(totalPrice)}</div>
         </header>
         <Cart products={this.state.cart}
+              totalPrice={totalPrice}
               toggleCart={this.removeProductFromCart.bind(this)}
               formatPrice={this.formatPrice}
               cartVisible={this.state.cartVisible}/>
+        <div className="key-visual-wrapper">
+          <div className="key-visual">
+            <div className="tag-line-wrapper">
+              <p className="tag-line">
+                Here you're sure to find a bargain on some of the finest ascii
+                available to purchase. Be sure to peruse our selection of ascii
+                faces in an exciting range of sizes and prices.
+              </p>
+            </div>
+            <div className="key-visual-img"></div>
+          </div>
+        </div>
 
-        <p className="tag-line">
-          Here you're sure to find a bargain on some of the finest ascii
-          available to purchase. Be sure to peruse our selection of ascii
-          faces in an exciting range of sizes and prices.
-        </p>
         <p className="ad-tag-line">But first, a word from our sponsors:</p>
 
         <Advertisement key={0} generateRandomId={this.generateRandomId.bind(this)}

@@ -17,16 +17,12 @@ class Cart extends React.Component {
       );
     });
 
-    const totalPrice = this.props.products.reduce((total, product) => {
-      return total + product.price
-    }, 0);
-
     return (
       <table className={ (this.props.cartVisible ? "cart-table" : "cart-hidden") + " product-grid-table"}>
-        <tfoot>
+        <tfoot className="cart-table-footer">
           <tr>
             <td colSpan="2">Total price: </td>
-            <td colSpan="4">{this.props.formatPrice(totalPrice)}</td>
+            <td colSpan="4">{this.props.formatPrice(this.props.totalPrice)}</td>
           </tr>
         </tfoot>
         {cartProducts}
