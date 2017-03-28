@@ -1,4 +1,5 @@
 import React from 'react';
+import Cart from './Cart';
 
 class Product extends React.Component {
 
@@ -38,15 +39,6 @@ class Product extends React.Component {
     this.props.toggleCart(this.props.product);
   }
 
-  formatPrice(price) {
-    if (price) {
-      // Convert price to Dollar and cents notation in the format of '$1.50'.
-      return '$' + (parseInt(price, 10) / 100).toFixed(2);
-    } else {
-      return 'Price Unavailable';
-    }
-  }
-
   styleFace(size) {
     return {'fontSize': size + 'px'};
   }
@@ -55,10 +47,11 @@ class Product extends React.Component {
     return (
       <tr key={this.props.product.id} onClick={this.handleClick.bind(this)}>
         <td>{this.props.product.id}</td>
-        <td>{this.formatPrice(this.props.product.price)}</td>
+        <td>{this.props.formatPrice(this.props.product.price)}</td>
         <td>{this.props.product.size}</td>
         <td style={this.styleFace(this.props.product.size)}>{this.props.product.face}</td>
         <td>{this.formatDateInRelativeTime(this.props.product.date)}</td>
+        {this.props.parentComponent === "Cart" ? <td> x </td> : <td> + </td>}
       </tr>
     );
   }

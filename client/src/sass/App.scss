@@ -34,6 +34,46 @@ body {
     }
 
   }
+  .cart-hidden {
+    display: none;
+  }
+  .cart-table {
+    // height: 170px;
+    position: absolute;
+    background: #fff;
+    // width: 427px;
+    right: 0;
+    border-collapse: collapse;
+    overflow: scroll;
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+      cursor: pointer;
+    }
+    th {
+      background-color: $discount-ascii-warehouse-color;
+      color: white;
+      text-align: center;
+      min-width: 55px;
+      width: 22%;
+      &:nth-child(2), &:nth-child(3) {
+        width: 7%;
+      }
+      &:nth-child(5) {
+        min-width: 182px;
+      }
+      &:nth-child(6) {
+        width: 22px;
+      }
+    }
+    td {
+      text-align: center;
+    }
+    tbody:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+  }
 
   .tag-line, .ad-tag-line {
     margin: 2%;
@@ -126,7 +166,7 @@ body {
   .product-grid {
     overflow-x: scroll;
 
-    table {
+    .product-grid-table {
       border-collapse: collapse;
       th, td {
         border: 1px solid black;
@@ -144,6 +184,10 @@ body {
         }
         &:nth-child(5) {
           min-width: 182px;
+        }
+        &:nth-child(6) {
+          width: 3%;
+          min-width: 22px;
         }
       }
       td {
