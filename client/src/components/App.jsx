@@ -21,7 +21,6 @@ class App extends Component {
   addProductToCart(product) {
     const newCart = this.state.cart.concat(product);
     this.setState({cart: newCart}, () => {
-      console.log(product.id, "has been added to cart.")
     });
   }
 
@@ -53,8 +52,6 @@ class App extends Component {
   }
 
   removeProductFromCart(product) {
-    console.log(product)
-    // TODO remove only one product.
     const newCart = this.state.cart.filter(
       (item, idx) => item.id !== product.id
     );
