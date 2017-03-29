@@ -176,16 +176,16 @@ class ProductGrid extends React.Component {
                                  componentName={this.defaultProps.componentName} />
                   <Product key={product.id}
                            product={product}
-                           formatPrice={this.props.formatPrice}
-                           toggleCart={this.props.toggleCart} />
+                           formatPriceFromCentsToDollars={this.props.formatPriceFromCentsToDollars}
+                           toggleProductInCart={this.props.toggleProductInCart} />
                 </tbody>)
       } else {
         // If there is no Advertisement, just render Product.
         return (<tbody key={idx}>
                   <Product key={product.id}
                            product={product}
-                           formatPrice={this.props.formatPrice}
-                           toggleCart={this.props.toggleCart} />
+                           formatPriceFromCentsToDollars={this.props.formatPriceFromCentsToDollars}
+                           toggleProductInCart={this.props.toggleProductInCart} />
                 </tbody>)
       }
     }.bind(this));
@@ -215,7 +215,7 @@ class ProductGrid extends React.Component {
                 </tr>
               </thead>
               <tfoot className={(allProductsLoaded ? "product-grid-footer" : "hidden-product-grid-footer")}>
-                <tr>
+                <tr className="table-footer">
                   <td colSpan="6">
                     <div>
                       {"~ end of catalogue ~"}

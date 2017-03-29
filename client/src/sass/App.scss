@@ -159,6 +159,10 @@ body {
     border-collapse: collapse;
     overflow: scroll;
 
+    tr:hover:not(.table-footer) {
+      background-color: $discount-ascii-warehouse-light;
+    }
+
     th, td {
       border: 1px solid black;
       padding: 10px;
@@ -292,7 +296,7 @@ body {
     .product-grid-table {
       border-collapse: collapse;
 
-      tr:hover {
+      tr:hover:not(.table-footer) {
         background-color: $discount-ascii-warehouse-light;
       }
       th, td {

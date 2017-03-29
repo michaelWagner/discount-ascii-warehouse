@@ -27,7 +27,7 @@ class App extends Component {
     });
   }
 
-  formatPrice(price) {
+  formatPriceFromCentsToDollars(price) {
     if (price) {
       // Convert price to Dollar and cents notation in the format of '$1.50'.
       return '$' + (parseInt(price, 10) / 100).toFixed(2);
@@ -85,14 +85,14 @@ class App extends Component {
         <header>
           <h1>Discount Ascii Warehouse</h1>
           <div className="cart-btn-wrapper">
-            <div className="cart-total-price">{this.formatPrice(totalPrice)}</div>
+            <div className="cart-total-price">{this.formatPriceFromCentsToDollars(totalPrice)}</div>
             <div className="cart-btn" onClick={this.toggleCartVisiblity.bind(this)}></div>
           </div>
         </header>
         <Cart products={this.state.cart}
               totalPrice={totalPrice}
-              toggleCart={this.removeProductFromCart.bind(this)}
-              formatPrice={this.formatPrice}
+              toggleProductInCart={this.removeProductFromCart.bind(this)}
+              formatPriceFromCentsToDollars={this.formatPriceFromCentsToDollars}
               cartVisible={this.state.cartVisible}/>
         <div className="key-visual-wrapper">
           <div className="key-visual">
@@ -113,11 +113,11 @@ class App extends Component {
                        componentName={this.defaultProps.componentName}/>
 
         <Loading hasLoaded={loadState} />
-        
+
         <p className="product-grid-guide">Click column header to sort. Click on product to add to cart.</p>
-        <ProductGrid toggleCart={this.addProductToCart.bind(this)}
+        <ProductGrid toggleProductInCart={this.addProductToCart.bind(this)}
                      generateRandomId={this.generateRandomId.bind(this)}
-                     formatPrice={this.formatPrice}
+                     formatPriceFromCentsToDollars={this.formatPriceFromCentsToDollars}
                      hasProductGridLoaded={this.hasLoaded.bind(this)}/>
       </div>
     );

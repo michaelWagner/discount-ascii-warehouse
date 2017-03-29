@@ -10,8 +10,8 @@ class Cart extends React.Component {
     const cartProducts = this.props.products.map((product, idx) => {
       return (
         <tbody key={idx}>
-          <Product key={product.id} toggleCart={this.props.toggleCart}
-                   product={product} formatPrice={this.props.formatPrice}
+          <Product key={product.id} toggleProductInCart={this.props.toggleProductInCart}
+                   product={product} formatPriceFromCentsToDollars={this.props.formatPriceFromCentsToDollars}
                    parentComponent={"Cart"}/>
         </tbody>
       );
@@ -20,9 +20,9 @@ class Cart extends React.Component {
     return (
       <table className={ (this.props.cartVisible ? "cart-table" : "cart-hidden") + " product-grid-table"}>
         <tfoot className="cart-table-footer">
-          <tr>
+          <tr className="table-footer">
             <td colSpan="2">Total price: </td>
-            <td colSpan="4">{this.props.formatPrice(this.props.totalPrice)}</td>
+            <td colSpan="4">{this.props.formatPriceFromCentsToDollars(this.props.totalPrice)}</td>
           </tr>
         </tfoot>
         {cartProducts}

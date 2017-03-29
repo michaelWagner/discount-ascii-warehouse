@@ -36,7 +36,7 @@ class Product extends React.Component {
 
   handleClick(event) {
     event.preventDefault();
-    this.props.toggleCart(this.props.product);
+    this.props.toggleProductInCart(this.props.product);
   }
 
   styleFace(size) {
@@ -47,7 +47,7 @@ class Product extends React.Component {
     return (
       <tr key={this.props.product.id} onClick={this.handleClick.bind(this)}>
         <td>{this.props.product.id}</td>
-        <td>{this.props.formatPrice(this.props.product.price)}</td>
+        <td>{this.props.formatPriceFromCentsToDollars(this.props.product.price)}</td>
         <td>{this.props.product.size}</td>
         <td style={this.styleFace(this.props.product.size)}>{this.props.product.face}</td>
         <td>{this.formatDateInRelativeTime(this.props.product.date)}</td>
