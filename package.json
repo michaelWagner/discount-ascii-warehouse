@@ -9,6 +9,9 @@
     "server": "babel-node server.js",
     "client": "babel-node start-client.js"
   },
+  "engines": {
+    "node": "6.0.0"
+  },
   "author": "",
   "license": "",
   "dependencies": {
