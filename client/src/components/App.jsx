@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
 import Cart from './Cart';
-import Product from './Product';
 import ProductGrid from './ProductGrid';
 import Loading from './Loading';
 import Advertisement from './Advertisement';

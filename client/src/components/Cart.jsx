@@ -2,9 +2,6 @@ import React from 'react';
 import Product from './Product';
 
 class Cart extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const cartProducts = this.props.products.map((product, idx) => {

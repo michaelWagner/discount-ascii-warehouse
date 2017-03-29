@@ -39,4 +39,5 @@ FAQ
 
 ### How do I start the app?
 
-Start with `npm start`. 
+Start with `npm start`
+Navigate to http://localhost:3000/
