@@ -52,11 +52,11 @@ class ProductGrid extends React.Component {
           this.loadProducts(nextQuery, (nextProducts) => {
             this.setState({nextProducts: nextProducts});
           });
+          // Show ProductGrid now that it has loaded.
+          this.props.hasProductGridLoaded();
         }
       );
     });
-    // Show ProductGrid now that it has loaded.
-    this.props.hasProductGridLoaded();
   }
 
   hasMoreProducts() {
@@ -96,7 +96,6 @@ class ProductGrid extends React.Component {
     },
       this.loadProducts(query, (nextProducts) => {
         if (nextProducts.length < this.defaultProps.numProductsPerPage) {
-          // TODO - Add footer component.
           this.setState({
             allProductsLoaded: true,
             nextProducts: nextProducts

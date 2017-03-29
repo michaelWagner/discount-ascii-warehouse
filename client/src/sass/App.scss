@@ -1,6 +1,6 @@
 $discount-ascii-warehouse-primary: #90bbb1;
 $discount-ascii-warehouse-primary-darker: #4E7E73;
-$discount-ascii-warehouse-secondary: #F19F4D;
+$discount-ascii-warehouse-orange: #F19F4D;
 $discount-ascii-warehouse-light-pink: #FEDCE2;
 $discount-ascii-warehouse-light: #F7CCA1;
 $discount-ascii-warehouse-accent: #DF744A;
@@ -17,6 +17,8 @@ body {
 .App {
   text-align: left;
   background-color: $discount-ascii-warehouse-light;
+  min-width: 285px;
+
   header {
     background-color: $discount-ascii-warehouse-primary;
     width: 100%;
@@ -30,30 +32,34 @@ body {
       width: 52%;
     }
 
-    .cart-btn {
-      background-image: url('../img/shopping_cart_btn.png');
-      background-size: 75%;
-      background-position: 46%;
-      background-repeat: no-repeat;
+    .cart-btn-wrapper {
       position: absolute;
-      height: 50px;
-      width: 57px;
       top: 1%;
-      right: 8%;
+      right: 1%;
+      width: 48%;
 
-      &:hover {
-        cursor: pointer;
-        background-image: url('../img/shopping_cart_btn_hover.png');
+      .cart-btn {
+        background-image: url('../img/shopping_cart_btn.png');
+        background-size: 75%;
+        background-position: 46%;
+        background-repeat: no-repeat;
+        height: 50px;
+        width: 57px;
+        float: right;
+
+        &:hover {
+          cursor: pointer;
+          background-image: url('../img/shopping_cart_btn_hover.png');
+        }
       }
-    }
 
-    .cart-total-price {
-      display: inline-block;
-      position: absolute;
-      top: 4%;
-      right: 2%;
-      font-size: 14px;
-      color: #fff;
+      .cart-total-price {
+        float: right;
+        font-size: 14px;
+        color: #fff;
+        line-height: 50px;
+        margin: 0 2%;
+      }
     }
   }
   .key-visual-wrapper {
@@ -137,9 +143,9 @@ body {
   }
   .ad-tag-line {
     font-weight: 600;
-    margin: 3% 8.5% 2.3% 6%;
-    width: 315px;
-    color: $discount-ascii-warehouse-secondary;
+    margin: 2% auto 2%;
+    width: 277px;
+    color: $discount-ascii-warehouse-accent;
   }
 
   .cart-hidden {
@@ -254,6 +260,9 @@ body {
 
 .loading-bar {
   display: block;
+  margin: auto;
+  width: 31%;
+  text-align: center;
 }
 
 .hide-loading-bar {
@@ -264,6 +273,13 @@ body {
   &:hover {
     font-weight: 800;
   }
+}
+
+.product-grid-guide {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 6% 1.2% 1%;
+  color: $discount-ascii-warehouse-accent;
 }
 
 #product-grid-wrapper {
@@ -285,11 +301,15 @@ body {
         cursor: pointer;
       }
       th {
-        background-color: $discount-ascii-warehouse-secondary;
+        background-color: $discount-ascii-warehouse-orange;
         color: white;
         text-align: center;
         min-width: 55px;
         width: 22%;
+        &:nth-child(1) {
+          width: 4%;
+          min-width: 25px;
+        }
         &:nth-child(2), &:nth-child(3) {
           width: 7%;
         }
@@ -299,6 +319,9 @@ body {
         &:nth-child(6) {
           width: 3%;
           min-width: 24px;
+        }
+        &:hover {
+          text-decoration: underline;
         }
       }
       td {

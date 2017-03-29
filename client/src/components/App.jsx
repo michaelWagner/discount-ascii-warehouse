@@ -84,8 +84,10 @@ class App extends Component {
       <div className='App'>
         <header>
           <h1>Discount Ascii Warehouse</h1>
-          <div className="cart-btn" onClick={this.toggleCartVisiblity.bind(this)}></div>
-          <div className="cart-total-price">{this.formatPrice(totalPrice)}</div>
+          <div className="cart-btn-wrapper">
+            <div className="cart-total-price">{this.formatPrice(totalPrice)}</div>
+            <div className="cart-btn" onClick={this.toggleCartVisiblity.bind(this)}></div>
+          </div>
         </header>
         <Cart products={this.state.cart}
               totalPrice={totalPrice}
@@ -111,6 +113,8 @@ class App extends Component {
                        componentName={this.defaultProps.componentName}/>
 
         <Loading hasLoaded={loadState} />
+        
+        <p className="product-grid-guide">Click column header to sort. Click on product to add to cart.</p>
         <ProductGrid toggleCart={this.addProductToCart.bind(this)}
                      generateRandomId={this.generateRandomId.bind(this)}
                      formatPrice={this.formatPrice}
