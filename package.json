@@ -8,7 +8,7 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "babel-node server.js",
     "client": "babel-node start-client.js",
-    "build": "npm install && start"
+    "build": "npm install && npm run start"
   },
   "engines": {
     "node": "6.0.0"
