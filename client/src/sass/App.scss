@@ -1,9 +1,11 @@
-$discount-ascii-warehouse-primary: #90bbb1;
-$discount-ascii-warehouse-primary-darker: #4E7E73;
-$discount-ascii-warehouse-orange: #F19F4D;
-$discount-ascii-warehouse-light-pink: #FEDCE2;
-$discount-ascii-warehouse-light: #F7CCA1;
-$discount-ascii-warehouse-accent: #DF744A;
+$primary-color-dark:   #0288D1;
+$primary-color:        #03A9F4;
+$primary-color-light:  #B3E5FC;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #FFEB3B;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
 
 $breakpoint-tablet: 768px;
 
@@ -11,18 +13,18 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Open Sans";
 }
 
 .App {
   text-align: left;
-  background-color: $discount-ascii-warehouse-light;
+  background-color: #FAFAFA;
   min-width: 285px;
 
   header {
-    background-color: $discount-ascii-warehouse-primary;
+    background-color: $primary-color-dark;
     width: 100%;
-    color: #fff;
+    color: $primary-color-text;
     h1 {
       padding: 19px 22px;
       margin: 0;
@@ -64,10 +66,10 @@ body {
   }
   .key-visual-wrapper {
     width: 100%;
-    background-color: #fff;
+    background-color: $primary-color;
     height: 300px;
     font-weight: 600;
-    color: $discount-ascii-warehouse-primary-darker;
+    color: $primary-color-text;
 
     .key-visual {
       width: 647px;
@@ -90,7 +92,7 @@ body {
       }
 
       .key-visual-img {
-        background-image: url('../img/lenny_face.png');
+        background-image: url('../img/lenny_face_white.png');
         background-size: 117%;
         background-position: 50%;
         background-repeat: no-repeat;
@@ -103,39 +105,21 @@ body {
   }
   @media (max-width: $breakpoint-tablet) {
     .key-visual-wrapper {
-      width: 100%;
-      background-color: #fff;
       height: 424px;
-      font-weight: 600;
-      color: $discount-ascii-warehouse-primary-darker;
 
       .key-visual {
         width: 285px;
-        height: 100%;
-        margin: auto;
 
         .tag-line-wrapper {
-          display: inline-block;
-          vertical-align: middle;
           height: 251px;
           line-height: 251px;
 
           .tag-line {
-            width: 291px;
-            float: left;
             margin: 14% 0;
-            text-align: center;
-            line-height: 31px;
           }
         }
 
         .key-visual-img {
-          background-image: url('../img/lenny_face.png');
-          background-size: 117%;
-          background-position: 50%;
-          background-repeat: no-repeat;
-          width: 100%;
-          height: 130px;
           float: none;
         }
       }
@@ -145,7 +129,7 @@ body {
     font-weight: 600;
     margin: 2% auto 2%;
     width: 277px;
-    color: $discount-ascii-warehouse-accent;
+    color: $secondary-text-color;
   }
 
   .cart-hidden {
@@ -156,37 +140,45 @@ body {
     position: absolute;
     background: #fff;
     right: 0;
-    border-collapse: collapse;
     overflow: scroll;
-
-    tr:hover:not(.table-footer) {
-      background-color: $discount-ascii-warehouse-light;
-    }
-
-    th, td {
-      border: 1px solid black;
+    border-collapse: collapse;
+    min-width: 253px;
+    td {
       padding: 10px;
       cursor: pointer;
-    }
-    td {
+      text-align: left;
+      &:nth-child(4), &:nth-child(5) {
+        text-align: right;
+      }
       &:nth-child(6) {
-        width: 10px;
+        text-align: center;
       }
     }
-    td {
-      text-align: center;
+    tr:hover:not(.table-footer) {
+      background-color: $primary-color-light;
     }
     tbody:nth-child(odd) {
-        background-color: #f2f2f2;
+        background-color: #F2F2F2;
     }
     tbody:nth-child(even) {
         background-color: #fff;
     }
     .cart-table-footer {
-      background-color: $discount-ascii-warehouse-primary;
-      color: #fff;
+      background-color: $primary-color-dark;
+      color: $primary-text-color;
       font-size: 17px;
       font-weight: 600px;
+
+      td {
+        &:nth-child(1) {
+          text-align: left;
+          padding: 13px;
+        }
+        &:nth-child(2) {
+          text-align: right;
+          padding: 13px;
+        }
+      }
     }
   }
 
@@ -267,6 +259,7 @@ body {
   margin: auto;
   width: 31%;
   text-align: center;
+  color: $secondary-text-color;
 }
 
 .hide-loading-bar {
@@ -282,8 +275,8 @@ body {
 .product-grid-guide {
   font-size: 12px;
   font-weight: 600;
-  margin: 6% 1.2% 1%;
-  color: $discount-ascii-warehouse-accent;
+  margin: 2% 1.2% 1%;
+  color: $secondary-text-color;
 }
 
 #product-grid-wrapper {
@@ -297,39 +290,72 @@ body {
       border-collapse: collapse;
 
       tr:hover:not(.table-footer) {
-        background-color: $discount-ascii-warehouse-light;
+        background-color: $primary-color-light;
       }
+
+      .table-advertisement {
+        padding: 10px;
+        cursor: pointer;
+        text-align: center;
+        border: 0px;
+        .ad {
+          display: block;
+          margin: 2% auto;
+        }
+      }
+
       th, td {
-        border: 1px solid black;
         padding: 10px;
         cursor: pointer;
       }
       th {
-        background-color: $discount-ascii-warehouse-orange;
-        color: white;
-        text-align: center;
+        background-color: $primary-color-dark;
+        color: $primary-color-text;
+        text-align: left;
         min-width: 55px;
         width: 22%;
+        height: 30px;
+
+        // Face
         &:nth-child(1) {
+          min-width: 182px;
+        }
+        // Date
+        &:nth-child(2) {
+          min-width: 182px;
+        }
+        // ID
+        &:nth-child(3) {
           width: 4%;
           min-width: 25px;
         }
-        &:nth-child(2), &:nth-child(3) {
+        // Price and Size
+        &:nth-child(4), &:nth-child(5) {
           width: 7%;
+          text-align: right;
         }
-        &:nth-child(5) {
-          min-width: 182px;
-        }
+        // Add to cart
         &:nth-child(6) {
           width: 3%;
           min-width: 24px;
+          font-size: 0px;
+          background-image: url("../img/add_shopping_cart_white.png");
+          background-size: 55%;
+          background-repeat: no-repeat;
+          background-position: 50%;
         }
         &:hover {
           text-decoration: underline;
         }
       }
       td {
-        text-align: center;
+        text-align: left;
+        &:nth-child(4), &:nth-child(5) {
+          text-align: right;
+        }
+        &:nth-child(6) {
+          text-align: center;
+        }
       }
       tbody:nth-child(odd) {
         background-color: #fff;
@@ -341,9 +367,14 @@ body {
         display: none;
       }
       .product-grid-footer {
-        background-color: $discount-ascii-warehouse-primary;
+        background-color: $primary-color-dark;
         color: #fff;
         font-size: 20px;
+
+        .table-footer > td > div {
+          text-align: center;
+          padding: 2%;
+        }
       }
     }
   }

@@ -15,7 +15,7 @@ class App extends Component {
       adList: []
     };
 
-    this.defaultProps = {componentName: 'App'}
+    this.defaultProps = {componentName: 'App'};
   }
 
   addProductToCart(product) {
@@ -36,6 +36,7 @@ class App extends Component {
   generateRandomId() {
     // Make sure randomId is unique.
     let randomId = Math.floor(Math.random() * 1000);
+
     while(this.state.adList.indexOf(randomId) > 0) {
       randomId = Math.floor(Math.random() * 1000);
     }
@@ -55,7 +56,7 @@ class App extends Component {
     const newCart = this.state.cart.filter(
       (item, idx) => item.id !== product.id
     );
-    this.setState({ cart: newCart });
+    this.setState({cart: newCart});
   }
 
   toggleCartVisiblity() {
@@ -72,7 +73,7 @@ class App extends Component {
     );
 
     const totalPrice = this.state.cart.reduce((total, product) => {
-      return total + product.price
+      return total + product.price;
     }, 0);
 
     return (

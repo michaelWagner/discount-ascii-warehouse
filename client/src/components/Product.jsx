@@ -25,7 +25,7 @@ class Product extends React.Component {
           result += unit[key] + ' ' + key + ' ';
         }
       }
-      result += 'ago.'
+      result += 'ago.';
     } else {
       result = date;
     }
@@ -45,11 +45,11 @@ class Product extends React.Component {
   render() {
     return (
       <tr key={this.props.product.id} onClick={this.handleClick.bind(this)}>
+        <td style={this.styleFace(this.props.product.size)}>{this.props.product.face}</td>
+        <td>{this.formatDateInRelativeTime(this.props.product.date)}</td>
         <td>{this.props.product.id}</td>
         <td>{this.props.formatPriceFromCentsToDollars(this.props.product.price)}</td>
         <td>{this.props.product.size}</td>
-        <td style={this.styleFace(this.props.product.size)}>{this.props.product.face}</td>
-        <td>{this.formatDateInRelativeTime(this.props.product.date)}</td>
         <td className="add-to-cart-btn">{this.props.parentComponent === "Cart" ? "x" : "+" }</td>
       </tr>
     );

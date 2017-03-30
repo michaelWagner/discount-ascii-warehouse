@@ -131,7 +131,7 @@ class ProductGrid extends React.Component {
             return descending
               ? b[column] - a[column]
               : a[column] - b[column];
-          case 'face':
+          case 'product':
             return descending
               ? b['size'] - a['size']
               : a['size'] - b['size'];
@@ -186,11 +186,11 @@ class ProductGrid extends React.Component {
                            product={product}
                            formatPriceFromCentsToDollars={this.props.formatPriceFromCentsToDollars}
                            toggleProductInCart={this.props.toggleProductInCart} />
-                </tbody>)
+                </tbody>);
       }
     }.bind(this));
 
-    const headers = ["ID", "Price", "Size", "Face", "Date", "Add To Cart"];
+    const headers = ["Product", "Date added", "Id", "Price", "Size", "Add To Cart"];
 
     const productHeaders = headers.map((title, idx) => (
       ((sortBy === title.toLowerCase())

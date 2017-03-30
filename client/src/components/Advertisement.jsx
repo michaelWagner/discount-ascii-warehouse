@@ -20,7 +20,7 @@ class Advertisement extends React.Component {
     const advertisement = (
       this.props.componentName === 'ProductGrid'
       ? (<tr>
-          <td colSpan="6">
+          <td className="table-advertisement" colSpan="6">
             <div>
               <img key={random} className="ad" alt="" src={"/ad/?r=" + random} />
             </div>
