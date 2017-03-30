@@ -5,9 +5,10 @@
   "description": "For all your ascii needs.",
   "main": "server.js",
   "scripts": {
-    "start": "npm install && concurrently \"npm run server\" \"npm run client\"",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "babel-node server.js",
-    "client": "babel-node start-client.js"
+    "client": "babel-node start-client.js",
+    "build": "npm install && start"
   },
   "engines": {
     "node": "6.0.0"
