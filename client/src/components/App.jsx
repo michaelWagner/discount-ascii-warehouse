@@ -53,9 +53,7 @@ class App extends Component {
   }
 
   removeProductFromCart(product) {
-    const newCart = this.state.cart.filter(
-      (item, idx) => item.id !== product.id
-    );
+    const newCart = this.state.cart.filter((item, idx) => item.id !== product.id);
     this.setState({cart: newCart});
   }
 
@@ -63,7 +61,6 @@ class App extends Component {
     const cartVisible = (this.state.cartVisible ? false : true);
     this.setState({cartVisible: cartVisible});
   }
-
 
   render() {
     const loadState = (
@@ -80,9 +77,9 @@ class App extends Component {
       <div className='App'>
         <header>
           <h1>Discount Ascii Warehouse</h1>
-          <div className="cart-btn-wrapper">
+          <div className="cart-btn-wrapper" onClick={this.toggleCartVisiblity.bind(this)}>
             <div className="cart-total-price">{this.formatPriceFromCentsToDollars(totalPrice)}</div>
-            <div className="cart-btn" onClick={this.toggleCartVisiblity.bind(this)}></div>
+            <div className="cart-btn"></div>
           </div>
         </header>
         <Cart products={this.state.cart}
