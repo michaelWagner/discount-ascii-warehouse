@@ -190,7 +190,7 @@ class ProductGrid extends React.Component {
       }
     }.bind(this));
 
-    const headers = ["Product", "Date added", "Id", "Price", "Size", "Add To Cart"];
+    const headers = ["Product", "Date", "Id", "Price", "Size", "Add To Cart"];
 
     const productHeaders = headers.map((title, idx) => (
       ((sortBy === title.toLowerCase())
