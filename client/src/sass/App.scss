@@ -30,6 +30,8 @@ body {
     background-color: $primary-color-dark;
     width: 100%;
     color: $primary-color-text;
+    position: relative;
+    z-index: 1000;
 
     h1 {
       padding: 19px 22px;
@@ -42,7 +44,7 @@ body {
 
     .cart-btn-wrapper {
       position: absolute;
-      top: 1%;
+      top: 12%;
       right: 1%;
       width: 48%;
 
@@ -155,12 +157,13 @@ body {
     overflow: scroll;
     border-collapse: collapse;
     min-width: 253px;
+    box-shadow: 6px 0 4px #111;
 
     td {
       padding: 10px;
       cursor: pointer;
       text-align: left;
-      height: 51px;
+      height: 50px;
 
       // Hide less useful content for mobile.
       @media (max-width: $breakpoint-tablet) {
