@@ -290,7 +290,7 @@ body {
   .loading-bar {
     display: block;
     margin: auto;
-    width: 31%;
+    width: 100%;
     text-align: center;
     color: $secondary-text-color;
   }
@@ -304,7 +304,8 @@ body {
   .ad-tag-line {
     font-weight: 600;
     margin: 2% auto 2%;
-    width: 277px;
+    width: 100%;
+    text-align: center;
     color: $secondary-text-color;
   }
 

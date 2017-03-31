@@ -1,0 +1,118 @@
+exports[`class Cart extends /* istanbul ignore next */_react2.default.Component {
+  constructor() {
+    super();
+    this.state = {
+      windowWidth: '0',
+      colSpanWidth: 4 };
+
+    this.updateWindowWidth = this.updateWindowWidth.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateWindowWidth();
+    window.addEventListener('resize', this.updateWindowWidth);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowWidth);
+  }
+
+  // Dynamically resize the cart depending on window width.
+  updateWindowWidth() {
+    let colSpanWidth = 4;
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth <= 768) {
+      colSpanWidth = 2;
+    }
+
+    this.setState({
+      windowWidth: window.innerWidth,
+      colSpanWidth: colSpanWidth });
+
+  }
+
+  render() {
+    const cartProducts = this.props.products.map((product, idx) => {
+      return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tbody', /* istanbul ignore next */{ key: idx, __source: { fileName: _jsxFileName, lineNumber: 41 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Product2.default, /* istanbul ignore next */{ key: product.id, toggleProductInCart: this.props.toggleProductInCart,
+            product: product, formatPriceFromCentsToDollars: this.props.formatPriceFromCentsToDollars,
+            parentComponent: "Cart", __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: this })));
+
+
+    });
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'table', /* istanbul ignore next */{ className: (this.props.cartVisible ? "cart-table" : "cart-hidden") + " product-grid-table", __source: { fileName: _jsxFileName, lineNumber: 50 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tfoot', /* istanbul ignore next */{ className: 'cart-table-footer', __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tr', /* istanbul ignore next */{ className: 'table-footer', __source: { fileName: _jsxFileName, lineNumber: 52 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */{ colSpan: '2', __source: { fileName: _jsxFileName, lineNumber: 53 }, __self: this }, /* istanbul ignore next */'Total price: '),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */{ className: 'table-footer-price', colSpan: this.state.colSpanWidth, __source: { fileName: _jsxFileName, lineNumber: 54 }, __self: this }, this.props.formatPriceFromCentsToDollars(this.props.totalPrice)))),
+
+
+        cartProducts));
+
+
+  }} renders and matches our snapshot 1`] = `
+<table
+  className="cart-table product-grid-table">
+  <tfoot
+    className="cart-table-footer">
+    <tr
+      className="table-footer">
+      <td
+        colSpan="2">
+        Total price: 
+      </td>
+      <td
+        className="table-footer-price"
+        colSpan={4}>
+        $6.29
+      </td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr
+      onClick={[Function]}>
+      <td
+        style={
+          Object {
+            "fontSize": "undefinedpx",
+          }
+        } />
+      <td />
+      <td />
+      <td>
+        $6.29
+      </td>
+      <td />
+      <td
+        className="add-to-cart-btn">
+        x
+      </td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr
+      onClick={[Function]}>
+      <td
+        style={
+          Object {
+            "fontSize": "undefinedpx",
+          }
+        } />
+      <td />
+      <td />
+      <td>
+        $6.29
+      </td>
+      <td />
+      <td
+        className="add-to-cart-btn">
+        x
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

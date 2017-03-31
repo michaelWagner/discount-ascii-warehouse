@@ -1,0 +1,413 @@
+exports[`class App extends /* istanbul ignore next */_react.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      hasProductGridLoaded: false,
+      cartVisible: false,
+      cart: [],
+      adList: [] };
+
+
+    this.defaultProps = { componentName: 'App' };
+  }
+
+  addProductToCart(product) {
+    const newCart = this.state.cart.concat(product);
+    this.setState({ cart: newCart }, () => {
+    });
+  }
+
+  formatPriceFromCentsToDollars(price) {
+    if (price) {
+      // Convert price to Dollar and cents notation in the format of '$1.50'.
+      return '$' + (parseInt(price, 10) / 100).toFixed(2);
+    } else {
+      return '$0.00';
+    }
+  }
+
+  generateRandomId() {
+    // Make sure randomId is unique.
+    let randomId = Math.floor(Math.random() * 1000);
+
+    while (this.state.adList.indexOf(randomId) > 0) {
+      randomId = Math.floor(Math.random() * 1000);
+    }
+
+    const newAdList = this.state.adList.concat(randomId);
+    this.setState({ adList: newAdList });
+
+    return randomId;
+  }
+
+  hasLoaded() {
+    this.setState({ hasProductGridLoaded: true });
+    return true;
+  }
+
+  removeProductFromCart(product) {
+    const newCart = this.state.cart.filter((item, idx) => item.id !== product.id);
+    this.setState({ cart: newCart });
+  }
+
+  toggleCartVisiblity() {
+    const cartVisible = this.state.cartVisible ? false : true;
+    this.setState({ cartVisible: cartVisible });
+  }
+
+  render() {
+    const loadState =
+    this.state.hasProductGridLoaded ?
+    "hide-loading-bar" :
+    "loading-bar";
+
+
+    const totalPrice = this.state.cart.reduce((total, product) => {
+      return total + product.price;
+    }, 0);
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'App', __source: { fileName: _jsxFileName, lineNumber: 77 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'header', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 78 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h1', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 79 }, __self: this }, /* istanbul ignore next */'Discount Ascii Warehouse'),
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'cart-btn-wrapper', onClick: this.toggleCartVisiblity.bind(this), __source: { fileName: _jsxFileName, lineNumber: 80 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'cart-total-price', __source: { fileName: _jsxFileName, lineNumber: 81 }, __self: this }, this.formatPriceFromCentsToDollars(totalPrice)),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'cart-btn', __source: { fileName: _jsxFileName, lineNumber: 82 }, __self: this }))),
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Cart2.default, /* istanbul ignore next */{ products: this.state.cart,
+          totalPrice: totalPrice,
+          toggleProductInCart: this.removeProductFromCart.bind(this),
+          formatPriceFromCentsToDollars: this.formatPriceFromCentsToDollars,
+          cartVisible: this.state.cartVisible, __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: this }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'key-visual-wrapper', __source: { fileName: _jsxFileName, lineNumber: 90 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'key-visual', __source: { fileName: _jsxFileName, lineNumber: 91 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'tag-line-wrapper', __source: { fileName: _jsxFileName, lineNumber: 92 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'tag-line', __source: { fileName: _jsxFileName, lineNumber: 93 }, __self: this }, /* istanbul ignore next */'Here you're sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.')),
+
+
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'key-visual-img', __source: { fileName: _jsxFileName, lineNumber: 99 }, __self: this }))),
+
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'ad-tag-line', __source: { fileName: _jsxFileName, lineNumber: 103 }, __self: this }, /* istanbul ignore next */'But first, a word from our sponsors:'),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Advertisement2.default, /* istanbul ignore next */{ key: 0, generateRandomId: this.generateRandomId.bind(this),
+          componentName: this.defaultProps.componentName, __source: { fileName: _jsxFileName, lineNumber: 105 }, __self: this }),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Loading2.default, /* istanbul ignore next */{ hasLoaded: loadState, __source: { fileName: _jsxFileName, lineNumber: 108 }, __self: this }),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'product-grid-guide', __source: { fileName: _jsxFileName, lineNumber: 110 }, __self: this }, /* istanbul ignore next */'Click column header to sort. Click on product to add to cart.'),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ProductGrid2.default, /* istanbul ignore next */{ toggleProductInCart: this.addProductToCart.bind(this),
+          generateRandomId: this.generateRandomId.bind(this),
+          formatPriceFromCentsToDollars: this.formatPriceFromCentsToDollars,
+          hasProductGridLoaded: this.hasLoaded.bind(this), __source: { fileName: _jsxFileName, lineNumber: 111 }, __self: this })));
+
+
+  }} renders and matches our snapshot 1`] = `
+<div
+  className="App">
+  <header>
+    <h1>
+      Discount Ascii Warehouse
+    </h1>
+    <div
+      className="cart-btn-wrapper"
+      onClick={[Function]}>
+      <div
+        className="cart-total-price">
+        $0.00
+      </div>
+      <div
+        className="cart-btn" />
+    </div>
+  </header>
+  <table
+    className="cart-hidden product-grid-table">
+    <tfoot
+      className="cart-table-footer">
+      <tr
+        className="table-footer">
+        <td
+          colSpan="2">
+          Total price: 
+        </td>
+        <td
+          className="table-footer-price"
+          colSpan={4}>
+          $0.00
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <div
+    className="key-visual-wrapper">
+    <div
+      className="key-visual">
+      <div
+        className="tag-line-wrapper">
+        <p
+          className="tag-line">
+          Here you're sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.
+        </p>
+      </div>
+      <div
+        className="key-visual-img" />
+    </div>
+  </div>
+  <p
+    className="ad-tag-line">
+    But first, a word from our sponsors:
+  </p>
+  <img
+    alt=""
+    className="ad"
+    src="/ad/?r=71" />
+  <div
+    className="loading-bar">
+    <span
+      className="loader">
+      <div
+        className="loader-indicator">
+        <h1>
+          <span>
+            Loading
+          </span>
+          <span
+            className="loader-ellipsis">
+            <span
+              className="loader-ellipsisDot">
+              .
+            </span>
+            <span
+              className="loader-ellipsisDot">
+              .
+            </span>
+            <span
+              className="loader-ellipsisDot">
+              .
+            </span>
+          </span>
+        </h1>
+      </div>
+    </span>
+  </div>
+  <p
+    className="product-grid-guide">
+    Click column header to sort. Click on product to add to cart.
+  </p>
+  <div
+    id="product-grid" />
+</div>
+`;
+
+exports[`class App extends /* istanbul ignore next */_react.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      hasProductGridLoaded: false,
+      cartVisible: false,
+      cart: [],
+      adList: [] };
+
+
+    this.defaultProps = { componentName: 'App' };
+  }
+
+  addProductToCart(product) {
+    const newCart = this.state.cart.concat(product);
+    this.setState({ cart: newCart }, () => {
+    });
+  }
+
+  formatPriceFromCentsToDollars(price) {
+    if (price) {
+      // Convert price to Dollar and cents notation in the format of '$1.50'.
+      return '$' + (parseInt(price, 10) / 100).toFixed(2);
+    } else {
+      return '$0.00';
+    }
+  }
+
+  generateRandomId() {
+    // Make sure randomId is unique.
+    let randomId = Math.floor(Math.random() * 1000);
+
+    while (this.state.adList.indexOf(randomId) > 0) {
+      randomId = Math.floor(Math.random() * 1000);
+    }
+
+    const newAdList = this.state.adList.concat(randomId);
+    this.setState({ adList: newAdList });
+
+    return randomId;
+  }
+
+  hasLoaded() {
+    this.setState({ hasProductGridLoaded: true });
+    return true;
+  }
+
+  removeProductFromCart(product) {
+    const newCart = this.state.cart.filter((item, idx) => item.id !== product.id);
+    this.setState({ cart: newCart });
+  }
+
+  toggleCartVisiblity() {
+    const cartVisible = this.state.cartVisible ? false : true;
+    this.setState({ cartVisible: cartVisible });
+  }
+
+  render() {
+    const loadState =
+    this.state.hasProductGridLoaded ?
+    "hide-loading-bar" :
+    "loading-bar";
+
+
+    const totalPrice = this.state.cart.reduce((total, product) => {
+      return total + product.price;
+    }, 0);
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'App', __source: { fileName: _jsxFileName, lineNumber: 77 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'header', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 78 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h1', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 79 }, __self: this }, /* istanbul ignore next */'Discount Ascii Warehouse'),
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'cart-btn-wrapper', onClick: this.toggleCartVisiblity.bind(this), __source: { fileName: _jsxFileName, lineNumber: 80 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'cart-total-price', __source: { fileName: _jsxFileName, lineNumber: 81 }, __self: this }, this.formatPriceFromCentsToDollars(totalPrice)),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'cart-btn', __source: { fileName: _jsxFileName, lineNumber: 82 }, __self: this }))),
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Cart2.default, /* istanbul ignore next */{ products: this.state.cart,
+          totalPrice: totalPrice,
+          toggleProductInCart: this.removeProductFromCart.bind(this),
+          formatPriceFromCentsToDollars: this.formatPriceFromCentsToDollars,
+          cartVisible: this.state.cartVisible, __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: this }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'key-visual-wrapper', __source: { fileName: _jsxFileName, lineNumber: 90 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'key-visual', __source: { fileName: _jsxFileName, lineNumber: 91 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'tag-line-wrapper', __source: { fileName: _jsxFileName, lineNumber: 92 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'tag-line', __source: { fileName: _jsxFileName, lineNumber: 93 }, __self: this }, /* istanbul ignore next */'Here you\'re sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.')),
+
+
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'key-visual-img', __source: { fileName: _jsxFileName, lineNumber: 99 }, __self: this }))),
+
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'ad-tag-line', __source: { fileName: _jsxFileName, lineNumber: 103 }, __self: this }, /* istanbul ignore next */'But first, a word from our sponsors:'),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Advertisement2.default, /* istanbul ignore next */{ key: 0, generateRandomId: this.generateRandomId.bind(this),
+          componentName: this.defaultProps.componentName, __source: { fileName: _jsxFileName, lineNumber: 105 }, __self: this }),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Loading2.default, /* istanbul ignore next */{ hasLoaded: loadState, __source: { fileName: _jsxFileName, lineNumber: 108 }, __self: this }),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'product-grid-guide', __source: { fileName: _jsxFileName, lineNumber: 110 }, __self: this }, /* istanbul ignore next */'Click column header to sort. Click on product to add to cart.'),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ProductGrid2.default, /* istanbul ignore next */{ toggleProductInCart: this.addProductToCart.bind(this),
+          generateRandomId: this.generateRandomId.bind(this),
+          formatPriceFromCentsToDollars: this.formatPriceFromCentsToDollars,
+          hasProductGridLoaded: this.hasLoaded.bind(this), __source: { fileName: _jsxFileName, lineNumber: 111 }, __self: this })));
+
+
+  }} renders and matches our snapshot 1`] = `
+<div
+  className="App">
+  <header>
+    <h1>
+      Discount Ascii Warehouse
+    </h1>
+    <div
+      className="cart-btn-wrapper"
+      onClick={[Function]}>
+      <div
+        className="cart-total-price">
+        $0.00
+      </div>
+      <div
+        className="cart-btn" />
+    </div>
+  </header>
+  <table
+    className="cart-hidden product-grid-table">
+    <tfoot
+      className="cart-table-footer">
+      <tr
+        className="table-footer">
+        <td
+          colSpan="2">
+          Total price: 
+        </td>
+        <td
+          className="table-footer-price"
+          colSpan={4}>
+          $0.00
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <div
+    className="key-visual-wrapper">
+    <div
+      className="key-visual">
+      <div
+        className="tag-line-wrapper">
+        <p
+          className="tag-line">
+          Here you\'re sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.
+        </p>
+      </div>
+      <div
+        className="key-visual-img" />
+    </div>
+  </div>
+  <p
+    className="ad-tag-line">
+    But first, a word from our sponsors:
+  </p>
+  <img
+    alt=""
+    className="ad"
+    src="/ad/?r=750" />
+  <div
+    className="loading-bar">
+    <span
+      className="loader">
+      <div
+        className="loader-indicator">
+        <h1>
+          <span>
+            Loading
+          </span>
+          <span
+            className="loader-ellipsis">
+            <span
+              className="loader-ellipsisDot">
+              .
+            </span>
+            <span
+              className="loader-ellipsisDot">
+              .
+            </span>
+            <span
+              className="loader-ellipsisDot">
+              .
+            </span>
+          </span>
+        </h1>
+      </div>
+    </span>
+  </div>
+  <p
+    className="product-grid-guide">
+    Click column header to sort. Click on product to add to cart.
+  </p>
+  <div
+    id="product-grid" />
+</div>
+`;
