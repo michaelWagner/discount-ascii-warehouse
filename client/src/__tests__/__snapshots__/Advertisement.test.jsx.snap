@@ -1,0 +1,44 @@
+exports[`class Advertisement extends /* istanbul ignore next */_react2.default.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      randomId: null };
+
+  }
+
+  componentWillMount() {
+    let randomId = this.props.generateRandomId();
+    this.setState({ randomId: randomId });
+  }
+
+  render() {
+    const random = this.state.randomId;
+
+    const advertisement =
+    this.props.componentName === 'ProductGrid' ?
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tr', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: this },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */{ className: 'table-advertisement', colSpan: '6', __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 24 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'img', /* istanbul ignore next */{ key: random, className: 'ad', alt: '', src: "/ad/?r=" + random, __source: { fileName: _jsxFileName, lineNumber: 25 }, __self: this })))) :
+
+
+
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'img', /* istanbul ignore next */{ key: random, className: 'ad', alt: '', src: "/ad/?r=" + random, __source: { fileName: _jsxFileName, lineNumber: 29 }, __self: this });
+
+
+    return advertisement;
+  }} renders and matches our snapshot 1`] = `
+<tr>
+  <td
+    className="table-advertisement"
+    colSpan="6">
+    <div>
+      <img
+        alt=""
+        className="ad"
+        src="/ad/?r=325" />
+    </div>
+  </td>
+</tr>
+`;

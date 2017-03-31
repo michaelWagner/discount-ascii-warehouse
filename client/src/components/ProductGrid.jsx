@@ -74,7 +74,7 @@ class ProductGrid extends React.Component {
           products[i] = JSON.parse(products[i]);
         }
       }
-      
+
       callback(products);
     });
   }
