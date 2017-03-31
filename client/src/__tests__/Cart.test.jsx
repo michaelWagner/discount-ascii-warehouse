@@ -7,7 +7,6 @@ import Cart from '../components/Cart';
 describe(Cart, () => {
 
   const products = [<Product />,<Product />];
-
   const totalPrice = products.reduce((total, product) => {
     return total + product.price;
   }, 0);

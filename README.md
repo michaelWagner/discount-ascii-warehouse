@@ -16,6 +16,9 @@ Features
 - Our product database is under high load due to growing demand for ascii, so we display an animated "loading..." message while the user waits.
 - To improve the user's experience, we always pre-emptively fetch the next batch of results in advance, making use of idle-time. They still are not displayed until the user has scrolled to the bottom of the product grid.
 - When the user reaches the end and there are no more products to display, show the message "~ end of catalogue ~".
+- Dropdown Cart component.
+- Add / Remove from Cart.
+- Cart price updates instantly.
 
 ### Ads features
 
@@ -36,5 +39,9 @@ FAQ
 
 ### How do I start the app?
 
-- Start with `npm start`
+- Start application with `npm start`
 - Navigate to http://localhost:3000/
+
+### How do I run the tests?
+
+- Run `cd client && npm test a` 

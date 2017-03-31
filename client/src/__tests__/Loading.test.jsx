@@ -7,7 +7,6 @@ describe(Loading, () => {
 
   const parentComponentName = 'ProductGrid';
   const loadState = 'loading-bar';
-
   const component = shallow(
     <Loading hasLoaded={loadState}/>
   );

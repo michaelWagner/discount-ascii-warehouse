@@ -15,7 +15,6 @@ describe(Product, () => {
   const mockFormatPriceFromCentsToDollars = jest.fn((price) => "$6.29");
   const mockToggleProductInCart = jest.fn();
   const mockStyleFace = jest.fn((size) => ({'fontSize': size + 'px'}));
-
   const component = shallow(
     <Product product={product}
              formatPriceFromCentsToDollars={mockFormatPriceFromCentsToDollars}
@@ -46,9 +45,4 @@ describe(Product, () => {
   it('adds style to the Products face', () => {
     expect(mockStyleFace(product.size)).toEqual({'fontSize': product.size + 'px'});
   });
-
-  it('formats the Products price', () => {
-    expect(mockStyleFace(product.size)).toEqual({'fontSize': product.size + 'px'});
-  });
-
 });

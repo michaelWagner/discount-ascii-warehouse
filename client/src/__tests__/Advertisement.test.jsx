@@ -7,7 +7,6 @@ describe(Advertisement, () => {
 
   const parentComponentName = "ProductGrid";
   const mockGenerateRandomId = jest.fn(() => (325));
-
   const component = shallow(
     <Advertisement generateRandomId={mockGenerateRandomId}
                    componentName={parentComponentName}/>
